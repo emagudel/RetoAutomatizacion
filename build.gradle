@@ -1,0 +1,72 @@
+repositories {
+    jcenter()
+    mavenLocal()
+}
+
+buildscript {
+    repositories {
+        jcenter()
+        mavenLocal()
+    }
+    dependencies {
+        classpath("net.serenity-bdd:serenity-gradle-plugin:2.0.52")
+        classpath "org.sonarsource.scanner.gradle:sonarqube-gradle-plugin:3.1.1"
+    }
+}
+
+apply plugin: "org.sonarqube"
+
+allprojects {
+    apply plugin: 'java'
+    apply plugin: 'maven'
+    apply plugin: 'idea'
+    apply plugin: 'net.serenity-bdd.aggregator'
+    sourceCompatibility = 1.8
+    targetCompatibility = 1.8
+}
+
+ext {
+    serenityVersion = '2.0.71'
+    serenityCucumberVersion = '1.9.39'
+}
+
+dependencies {
+    implementation "net.serenity-bdd:serenity-screenplay:$rootProject.ext.serenityVersion"
+    implementation "net.serenity-bdd:serenity-screenplay-webdriver:$rootProject.ext.serenityVersion"
+    implementation "net.serenity-bdd:serenity-cucumber:$rootProject.ext.serenityCucumberVersion"
+
+    implementation group: 'io.appium', name: 'java-client', version: '6.1.0'
+    implementation group: 'org.apache.poi', name: 'poi', version: '3.17'
+    implementation group: 'org.apache.poi', name: 'poi-ooxml', version: '3.17'
+    implementation group: 'com.codoid.products', name: 'fillo', version: '1.18'
+    implementation group: 'org.apache.commons', name: 'commons-lang3', version: '3.7'
+    implementation group: 'io.rest-assured', name: 'rest-assured', version: '3.2.0'
+
+    implementation 'org.apache.commons:commons-lang3:3.8'
+    implementation 'org.apache.logging.log4j:log4j-api:2.6.1'
+    implementation 'org.apache.logging.log4j:log4j-core:2.6.1'
+    implementation 'com.google.code.gson:gson:2.8.5'
+
+    testImplementation 'junit:junit:4.12'
+    testImplementation 'org.assertj:assertj-core:3.6.2'
+    testImplementation 'org.slf4j:slf4j-simple:1.7.7'
+    testImplementation "net.serenity-bdd:serenity-core:$rootProject.ext.serenityVersion"
+    testImplementation "net.serenity-bdd:serenity-junit:$rootProject.ext.serenityVersion"
+
+    implementation 'net.serenity-bdd:serenity-screenplay-rest:2.0.42'
+    implementation 'net.serenity-bdd:serenity-rest-assured:2.0.42'
+    implementation 'org.reflections:reflections:0.9.11'
+
+    compileOnly 'org.projectlombok:lombok:1.18.16'
+    annotationProcessor 'org.projectlombok:lombok:1.18.16'
+    testCompileOnly 'org.projectlombok:lombok:1.18.16'
+    testAnnotationProcessor 'org.projectlombok:lombok:1.18.16'
+
+}
+
+tasks.withType(Test) {
+    systemProperty "file.encoding", "UTF-8"
+}
+
+gradle.startParameter.continueOnFailure = true
+

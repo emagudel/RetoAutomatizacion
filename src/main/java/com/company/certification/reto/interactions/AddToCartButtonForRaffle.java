@@ -30,7 +30,7 @@ public class AddToCartButtonForRaffle implements Interaction {
                 );
             }
         } catch (Exception e) {
-            throw new NullPointerException("Problems selecting the shoe by raffle" + e);
+            throw new NullPointerException("Problems selecting" + e);
         }
     }
 }

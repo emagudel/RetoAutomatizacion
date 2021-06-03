@@ -1,9 +1,9 @@
 package com.company.certification.reto.exceptions;
 
-public class BuyShoeException extends RuntimeException {
+public class BuyArticleException extends RuntimeException {
     private static final long serialVersionUID = 1L;
 
-    public BuyShoeException(Exception e) {
+    public BuyArticleException(Exception e) {
         super(e);
     }
 

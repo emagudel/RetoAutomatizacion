@@ -1,14 +1,14 @@
-Feature: Buy shoes upcoming on the Nike page
+Feature: Buy on the Mercado Libre page
 
-  Scenario Outline: Buy shoes upcoming on specific dates
-    Given I visit the page nike in app
-    When I look for shoes with this information in app
-      | reference   | shoeSize   | user   | passwordUser   |
-      | <reference> | <shoeSize> | <user> | <passwordUser> |
-    Then I buy the shoes that me like in app
+  Scenario Outline: Buy articles Mercado Libre page
+    Given I visit the page Mercado Libre in app
+    When I look the articles especific with this information in app
+      | user   | passwordUser   | expectedResult   |
+      | <user> | <passwordUser> | <expectedResult> |
+    Then I buy the article that me like in app
+    And Verify the user authentication
 
     Examples:
-      | reference | shoeSize | user | passwordUser |
-      | May7AirJordan11LowLegendBlue | M11/W12.5 | x.rodriguez2451@gmail.com | ILOVEmila2451$$ |
-
+      | user                   | passwordUser | expectedResult |
+      | agudelo.0312@gmail.com | sebastian    | Hola Erik     |
 

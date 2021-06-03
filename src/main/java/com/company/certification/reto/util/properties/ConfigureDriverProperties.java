@@ -1,7 +1,7 @@
 package com.company.certification.reto.util.properties;
 
 
-import com.company.certification.reto.exceptions.BuyShoeException;
+import com.company.certification.reto.exceptions.BuyArticleException;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.chrome.ChromeOptions;
@@ -51,7 +51,7 @@ public class ConfigureDriverProperties {
                     throw new RuntimeException("Unsupported webdriver: " + webdriver);
             }
         } catch (IOException e) {
-            throw new BuyShoeException(e);
+            throw new BuyArticleException(e);
         }
     }
 }

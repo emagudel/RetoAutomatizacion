@@ -1,9 +1,12 @@
 package com.company.certification.reto.stepdefinitions;
 
 
-import com.company.certification.reto.tasks.BuyShoes;
+import com.company.certification.reto.exceptions.ExpectedResultErr;
+import com.company.certification.reto.questions.VerifyExpectedResult;
+import com.company.certification.reto.tasks.BuyArticles;
 import com.company.certification.reto.util.properties.ConfigureDriverProperties;
 import cucumber.api.java.Before;
+import cucumber.api.java.en.And;
 import cucumber.api.java.en.Given;
 import cucumber.api.java.en.Then;
 import cucumber.api.java.en.When;
@@ -17,7 +20,9 @@ import net.thucydides.core.annotations.Managed;
 import java.util.List;
 import java.util.Map;
 
-import static com.company.certification.reto.tasks.LoadData.loadDataTestWithTheFollowing;
+import static com.company.certification.reto.exceptions.ExpectedResultErr.EXPECTED_RESULT;
+import static com.company.certification.reto.tasks.LoadDataTest.loadData;
+import static net.serenitybdd.screenplay.GivenWhenThen.seeThat;
 
 
 public class User_History_01_StepDefinition {
@@ -31,19 +36,26 @@ public class User_History_01_StepDefinition {
         OnStage.setTheStage(new OnlineCast());
     }
 
-    @Given("^I visit the page nike in app$")
-    public void i_visit_the_page_nike() {
-        Jesus.attemptsTo(Open.url("https://www.nike.com/launch?s=upcoming"));
+    @Given("^I visit the page Mercado Libre in app$")
+    public void i_visit_the_page_mercado_libre() {
+        Jesus.wasAbleTo(Open.url("https://www.linio.com.co/"));
     }
 
-    @When("^I look for shoes with this information in app$")
-    public void i_look_for_shoes_with_this_information(List<Map<String, Object>> information) {
-        Jesus.attemptsTo(loadDataTestWithTheFollowing(information));
+    @When("^I look the articles especific with this information in app$")
+    public void i_look_the_articles_especific_with_this_information(List<Map<String, Object>> information) {
+        Jesus.attemptsTo(loadData(information));
     }
 
-    @Then("^I buy the shoes that me like in app$")
-    public void i_buy_the_shoes_that_me_like() {
-        Jesus.attemptsTo(BuyShoes.inTheAplication());
+    @Then("^I buy the article that me like in app$")
+    public void i_buy_the_article_that_me_like() {
+        Jesus.attemptsTo(BuyArticles.inTheAplication());
+    }
+
+    @And("^Verify the user authentication$")
+    public void verify_the_user_authentication() {
+        Jesus.should(seeThat(VerifyExpectedResult.inAplication())
+                .orComplainWith(ExpectedResultErr.class, EXPECTED_RESULT)
+        );
     }
 
 }
